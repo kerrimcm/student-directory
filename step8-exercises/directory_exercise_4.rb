@@ -23,6 +23,7 @@ def input_students
     puts "-------------"
   end
   
+  # rewritten each method using while loop
   def print(students)
     counter = 0
     while true do
@@ -34,11 +35,6 @@ def input_students
     end
   end
 
-  # students.each do |student|
-   # puts "#{student[:name]} (#{student[:cohort]} cohort)"
-  # end
-# end
-  
   def print_footer(students)
     puts "Overall, we have #{students.count} great students"
   end
