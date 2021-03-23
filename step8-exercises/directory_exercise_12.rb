@@ -26,18 +26,10 @@ def input_students
   end
   
   def print(students)
-    name = input_students
-    students = input_students
-    counter = 0 
-    while true do
-      if name.empty? 
-        input_students
-      else
-        students.each do |student|
-          puts "#{student[:name]} (#{student[:cohort]} cohort)"
-        end
-      end 
-      break if counter == students.count
+    if students.length != 0
+      students.each do |student|
+        puts "#{student[:name]} (#{student[:cohort]} cohort)"
+      end
     end
   end
   

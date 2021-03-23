@@ -24,12 +24,14 @@ def input_students
   end
   
   def print(students)
-    students = input_students
     counter = 0
-    while counter <= students.count do
-      puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    while true do
+      puts "#{students[counter][:name]} (#{students[counter][:cohort]} cohort)"
+      counter += 1
+      if counter == students.count
+      break
+      end
     end
-    counter += 1
   end
 
   # students.each do |student|
