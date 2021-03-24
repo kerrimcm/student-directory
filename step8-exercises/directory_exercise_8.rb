@@ -3,47 +3,56 @@
 # (the map() method may be useful but it's not the only option), 
 # iterate over it and only print the students from that cohort.
 def input_students
-    puts "Please enter the name and cohort months of the students"
-    puts "To finish, just hit return twice"
-    # create an empty array
-    students = []
-    # get the first name
+  puts "Please enter the name and cohort months of the students"
+  puts "To finish, just hit return twice"
+  # create an empty array
+  students = []
+  # get the first name
+  puts "Enter name:"
+  name = gets.chomp
+  puts "Enter cohort month:"
+  cohort = gets.chomp  
+  # while the name and month are not empty, repeat this code
+  while !name.empty? && !cohort.empty? do
+    # add the student hash to the array
+    students << {name: name, cohort: cohort.to_sym}
+    puts "Now we have #{students.count} students"
+    # get another name and month from the user
     puts "Enter name:"
     name = gets.chomp
     puts "Enter cohort month:"
-    cohort = gets.chomp  
-    # while the name and month are not empty, repeat this code
-    while !name.empty? && !cohort.empty? do
-      # add the student hash to the array
-      students << {name: name, cohort: cohort.to_sym}
-      puts "Now we have #{students.count} students"
-      # get another name and month from the user
-      puts "Enter name:"
-      name = gets.chomp
-      puts "Enter cohort month:"
-      cohort = gets.chomp 
-      end
-      # return the array of students
-    students
+    cohort = gets.chomp 
   end
+  # return the array of students
+  students
+end
   
-  def print_header
-    puts "The students of Villains Academy"
-    puts "-------------"
-  end
-  
-  def print(students)
-    students.group_by(&:cohort).each do |student|
-      puts "#{student[:name]} (#{student[:cohort]} cohort)"
+def print_header
+  puts "The students of Villains Academy"
+  puts "-------------"
+end
+
+def print(students)
+  grouped_by_cohort = {}
+  # make method that groups by cohort
+  students.each do |name|
+    cohort = name[:cohort]
+    if grouped_by_cohort[cohort] == nil
+      grouped_by_cohort[cohort] = []
     end
+    grouped_by_cohort[cohort].push(name[:name])
   end
-  
-  def print_footer(students)
-    puts "Overall, we have #{students.count} great students"
+  grouped_by_cohort.each do |cohort, names|
+    puts cohort, names
   end
+end
+
+def print_footer(students)
+  puts "Overall, we have #{students.count} great students"
+end
   
-  students = input_students
-  #nothing happens until we call the methods
-  print_header
-  print(students)
-  print_footer(students)
+students = input_students
+#nothing happens until we call the methods
+print_header
+print(students)
+print_footer(students)
