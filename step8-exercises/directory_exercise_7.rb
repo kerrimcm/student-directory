@@ -3,48 +3,49 @@
 # What if one of the values is empty? Can you supply a default value? 
 # The input will be given to you as a string? How will you convert it to a symbol? 
 # What if the user makes a typo?
+@students = []
+  
 def input_students
-    puts "Please enter the name and cohort months of the students"
-    puts "To finish, just hit return twice"
-    # create an empty array
-    students = []
-    # get the first name
+  puts "Please enter the name and cohort month of the student"
+  puts "To finish, just hit return twice"
+
+  valid_month_spelling = ["January", "February", "March", "April", "May", "June", "July", 
+  "August", "September", "October", "November", "December"]
+  
+  while true do 
     puts "Enter name:"
     name = gets.chomp
     puts "Enter cohort month:"
-    cohort = gets.chomp  
-    # while the name and month are not empty, repeat this code
-    while !name.empty? && !cohort.empty? do
-      # add the student hash to the array
-      students << {name: name, cohort: cohort.to_sym}
-      puts "Now we have #{students.count} students"
-      # get another name and month from the user
-      puts "Enter name:"
-      name = gets.chomp
-      puts "Enter cohort month:"
-      cohort = gets.chomp 
-      end
-      # return the array of students
-    students
-  end
-  
-  def print_header
-    puts "The students of Villains Academy"
-    puts "-------------"
-  end
-  
-  def print(students)
-    students.each do |student|
-      puts "#{student[:name]} (#{student[:cohort]} cohort)"
+    cohort = gets.chomp 
+    if valid_month_spelling.include?(cohort)
+      @students << {name: name, cohort: cohort.to_sym}
+      puts "Now we have #{@students.count} students"
+    elsif name.empty?
+      break
+    elsif cohort.empty?
+      cohort = "default"
+      @students << {name: name, cohort: cohort.to_sym}
+      puts "Now we have #{@students.count} students"
     end
   end
+end
+
+def print_header
+  puts "The students of Villains Academy"
+  puts "-------------"
+end
   
-  def print_footer(students)
-    puts "Overall, we have #{students.count} great students"
+def print_student_list
+  @students.each do |student|
+    puts "#{student[:name]} (#{student[:cohort]} cohort)"
   end
+end
   
-  students = input_students
-  #nothing happens until we call the methods
-  print_header
-  print(students)
-  print_footer(students)
+def print_footer
+  puts "Overall, we have #{@students.count} great students"
+end
+  
+input_students
+print_header
+print_student_list
+print_footer
